@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+
 from app.breed.shemas import BreedBase
 
 
@@ -30,7 +31,6 @@ class KittenBase(BaseModel):
         description="A brief description of the kitten.",
         max_length=250,
     )
-
 
 
 class KittenCreate(KittenBase):

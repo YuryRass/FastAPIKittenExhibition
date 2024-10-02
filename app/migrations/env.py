@@ -1,13 +1,11 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
+from sqlalchemy import engine_from_config, pool
 
+from app.breed.model import Breed  # noqa
 from app.config import get_settings
 from app.database import Base
-from app.breed.model import Breed  # noqa
 from app.kitten.model import Kitten  # noqa
 
 settings = get_settings()

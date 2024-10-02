@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from app.kitten.router import router as kitten_router
 from app.breed.router import router as breed_router
+from app.kitten.router import router as kitten_router
 
 description = """REST API для администратора онлайн выставки котят"""
 

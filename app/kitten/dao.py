@@ -1,11 +1,11 @@
 from typing import Any
 
 from sqlalchemy import select
-from sqlalchemy.orm import joinedload
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import joinedload
 
-from app.database import async_session
 from app.base_dao import BaseDAO
+from app.database import async_session
 from app.kitten.model import Kitten
 
 

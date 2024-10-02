@@ -1,5 +1,5 @@
-from app.breed.model import Breed
 from app.base_dao import BaseDAO
+from app.breed.model import Breed
 
 
 class BreedDAO(BaseDAO):
