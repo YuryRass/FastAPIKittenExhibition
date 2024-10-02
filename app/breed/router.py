@@ -6,7 +6,7 @@ from app.breed.shemas import BreedBase
 router: APIRouter = APIRouter(tags=["Породы котят"])
 
 
-@router.get("/breeds/", summary="Список всех пород")
+@router.get("/breeds/", summary="Список всех пород", response_model=list[BreedBase])
 async def get_breeds() -> list[BreedBase]:
     """Возвращает список всех имеющихся пород котят."""
     return await BreedDAO.find()

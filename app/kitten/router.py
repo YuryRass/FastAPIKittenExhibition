@@ -6,19 +6,25 @@ from app.kitten.schemas import KittenCreate, SKitten
 router: APIRouter = APIRouter(tags=["Котята"])
 
 
-@router.get("/kittens/", response_model=list[SKitten])
+@router.get("/kittens/", response_model=list[SKitten], summary="Все котята")
 async def get_kittens() -> list[SKitten]:
     """Получение списка всех котят."""
     return await KittenDAO.get_detailed()
 
 
-@router.get("/kittens/breed/{breed_id}/", response_model=list[SKitten])
+@router.get(
+    "/kittens/breed/{breed_id}/",
+    response_model=list[SKitten],
+    summary="Котята конкретной породы",
+)
 async def get_kittens_by_breed(breed_id: int) -> list[SKitten]:
     """Получение информации о котятах конкретной породы."""
     return await KittenDAO.get_detailed(breed_id=breed_id)
 
 
-@router.get("/kittens/{kitten_id}/", response_model=SKitten)
+@router.get(
+    "/kittens/{kitten_id}/", response_model=SKitten, summary="Конкретный котенок."
+)
 async def get_kitten(kitten_id: int) -> SKitten:
     """Получение информации о конкретном котенке."""
     kitten = await KittenDAO.get_detailed(id=kitten_id)
@@ -27,14 +33,22 @@ async def get_kitten(kitten_id: int) -> SKitten:
     return kitten
 
 
-@router.post("/kittens/", response_model=SKitten)
+@router.post(
+    "/kittens/",
+    response_model=SKitten,
+    summary="Добавление котенка",
+)
 async def create_kitten(kitten: KittenCreate) -> SKitten:
     """Добавление нового котенка."""
     res = await KittenDAO.add(**kitten.model_dump())
     return await KittenDAO.get_detailed(id=res.id)
 
 
-@router.put("/kittens/{kitten_id}/", response_model=SKitten)
+@router.put(
+    "/kittens/{kitten_id}/",
+    response_model=SKitten,
+    summary="Изменение котенка",
+)
 async def update_kitten(
     kitten_id: int,
     kitten: KittenCreate,
@@ -48,7 +62,7 @@ async def update_kitten(
     return await KittenDAO.get_detailed(id=res.id)
 
 
-@router.delete("/kittens/{kitten_id}/")
+@router.delete("/kittens/{kitten_id}/", summary="Удаление котенка")
 async def delete_kitten(kitten_id: int) -> None:
     """Удаление котенка."""
     db_kitten = await KittenDAO.find_one_or_none(id=kitten_id)
